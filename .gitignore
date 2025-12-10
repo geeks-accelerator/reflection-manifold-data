@@ -1,0 +1,304 @@
+# Go - Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go - Project-specific binaries (root directory only)
+/patent-processor
+/patent-processor.exe
+/add-metadata
+/add-metadata.exe
+/filename-watcher
+/filename-watcher.exe
+/suno-pipeline
+/suno-pipeline.exe
+/multiverse-web
+/multiverse-web.exe
+/web-server
+/web-server.exe
+cmd/web/multiverse-web
+cmd/web/multiverse-web.exe
+
+# Go - Stray binaries (wrong locations - use Makefile instead)
+# Never build in cmd/ or project root - always use "make build-web" → bin/
+/multiverse-web
+/web-server
+/cmd/web/multiverse-web
+
+# Go - Test binaries built with `go test -c`
+*.test
+
+# Go - Coverage output
+*.out
+coverage.out
+coverage.html
+coverage.txt
+*.coverprofile
+
+# Go - Profiling output
+*.prof
+cpu.prof
+mem.prof
+*.pprof
+
+# Go - Dependency directories
+vendor/
+
+# Go - Workspace file
+go.work
+go.work.sum
+
+# Go - Module cache (usually in GOPATH)
+# Uncomment if storing locally
+# pkg/
+
+# Go - Built binaries (our cmd/ outputs)
+bin/
+
+# Go - Build cache
+go-build/
+
+# Go - Delve debugger
+__debug_bin
+.dlv/
+
+# Go - Air live reload (tmp/ covered in Temporary files section)
+.air.toml.local
+
+# Go - Crash logs
+crash.log
+
+# Go - Environment
+.envrc
+.env.go
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+*.cover
+*.mo
+*.pot
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+.npm
+.yarn/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vscode-test/
+.history/
+*.sublime-project
+*.sublime-workspace
+.atom/
+*.code-workspace
+
+# vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Emacs
+\#*\#
+.\#*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Logs
+*.log
+logs/
+processing.log
+patent_processor.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+*.tmp
+*.temp
+
+# Output directories (configurable from other projects - not applicable here)
+patents/
+outputs/
+# artifacts/ - DO NOT IGNORE - this is our knowledge base (guides, conversations, songs)
+
+# Config files with sensitive data
+config.local.yaml
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.template
+!.env.sample
+*.key
+*.pem
+*.cert
+secrets.yaml
+secrets.json
+
+# API keys and credentials
+*_secret*
+*_secrets*
+credentials.json
+service-account*.json
+
+# Test data
+test_patents/
+sample_patents/
+
+# Build artifacts
+dist/
+build/
+*.pyc
+*.pyo
+
+# Coverage reports (language-specific ones above)
+.nyc_output/
+
+# Backup files
+*.bak
+*.backup
+.env.backup-*
+.env.bak
+
+# Cache directories
+.cache/
+cache/
+.parcel-cache/
+
+# Gemini response cache
+.cache/gemini/
+
+# Debug files
+debug
+
+# Archive files (if temporary)
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.rar
+*.7z
+
+# Database files (if local/temporary)
+*.db
+*.sqlite
+*.sqlite3
+
+# Documentation builds
+docs/_build/
+site/
+_site/
+.sass-cache/
+
+# Lock files (keep project-specific ones, ignore others)
+*.lock
+!go.sum
+!Pipfile.lock
+!poetry.lock
+
+# Media cache
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wav
+*.mp3
+*.flac
+# Exception: keep small reference media in specific dirs
+!reference/**/*.mp3
+!samples/**/*.wav
+
+# Suno Pipeline - Intake directories (working files, not tracked)
+intake/incoming/*
+intake/rejected/*
+intake/processed/*
+!intake/*/.gitkeep
+
+# Suno Pipeline - Song local media (not tracked, redownload from Suno if needed)
+songs/*/local/
+
+# Suno Pipeline - Generated workflow files (regenerate with suno-pipeline commands)
+songs/*/suno_handoff.txt
+songs/*/temp_creative_package.md
+songs/*/caption_template.md
+songs/*/caption_output.txt
+songs/*/playlist_suggestions.json
+# Note: suno.md is NOT gitignored - it's a tracked creative file
+
+# Suno Pipeline - Test songs (from automated tests, not production)
+songs/test-*/
+
+# Multi-Channel Streaming - Runtime state (not tracked, regenerated on streaming start)
+channels/*/streaming-state.json
+
+# Observability - Performance and diagnostic logs (logged locally for analysis)
+# See: docs/plans/2025-10-21-bootstrap-observability-implementation.md
+logs/gemini-timing.log
+logs/gemini-timing.jsonl
+logs/gemini-diagnostics.jsonl
+logs/whisper-timing.jsonl
+logs/whisper-diagnostics.jsonl
+logs/*-timing.jsonl
+logs/*-diagnostics.jsonl
+.claude/
+# MLX models (large binary files, download separately)
+models/
