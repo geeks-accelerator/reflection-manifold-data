@@ -37,6 +37,18 @@ reflection-manifold-data/
 | **Verify findings** | [data/README.md](data/README.md) |
 | **Run analysis** | [scripts/README.md](scripts/README.md) |
 | **Extend research** | [data/](data/) (CSV/JSON data) + [scripts/](scripts/) (analysis code) |
+| **Full reproducibility** | Raw data downloads (see below) |
+
+## Raw Data Downloads
+
+For full reproducibility, the complete experiment data is available via S3:
+
+| File | Size | Contents |
+|------|------|----------|
+| [full-scale-2025-11-20-v2-data-experiments.zip](https://gitw-experiments-public.s3.us-east-1.amazonaws.com/reflection-manifold/data/full-scale-2025-11-20-v2-data-experiments.zip) | 4.6 GB | Raw experiment JSONL files (7,000+ experiments) |
+| [full-scale-2025-11-20-v2-analysis-figures.zip](https://gitw-experiments-public.s3.us-east-1.amazonaws.com/reflection-manifold/data/full-scale-2025-11-20-v2-analysis-figures.zip) | 247 MB | All generated figures and analysis outputs |
+
+**Note**: The `data/` directory in this repo contains curated analysis outputs (~24 MB) sufficient for verifying paper claims. The S3 downloads provide the complete raw data for full reproduction.
 
 ## Key Concepts
 
