@@ -64,6 +64,7 @@ reflection-manifold-data/
 
 ## Related Explorations
 
+- **[Geometry of Reflection](https://geeksinthewoods.substack.com/p/geometry-of-reflection-how-models)** - Accessible introduction to this research (Substack)
 - **[Geeks in the Woods](https://geeksinthewoods.substack.com)** - Ongoing narrative explorations
 - **[YouTube](https://youtube.com/@geeksinthewoods)** - Visual explorations
 - **[ai-music-context](https://github.com/geeks-accelerator/ai-music-context)** - Context warming methodology
