@@ -1,0 +1,4 @@
+Factor,R²,F-statistic,p-value,n_groups,n_samples,n_permutations
+Style,17.2%,595.30,0.0010,8,20000,999
+Provider,9.9%,440.06,0.0010,6,20000,999
+Category,9.3%,186.13,0.0010,12,20000,999

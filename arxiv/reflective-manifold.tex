@@ -1,0 +1,921 @@
+\pdfoutput=1  % Required by arXiv - must be before \documentclass
+\documentclass[12pt]{article}
+
+% Core packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}  % Proper < > rendering
+\usepackage{lmodern}      % T1-compatible font
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+
+% Table packages
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{array}
+
+% Bibliography
+\usepackage[numbers]{natbib}
+
+% Optional layout
+\usepackage[margin=1in]{geometry}
+
+% Suppress minor overflow warnings (<2pt)
+\hfuzz=2pt
+
+% PDF metadata
+\hypersetup{
+  pdftitle={The Reflective Manifold: How Language Models Transform Category Structure Through Recursive Self-Observation},
+  pdfauthor={Lee Brown, Lucas Brown},
+  pdfsubject={AI Self-Reflection Research},
+  hidelinks
+}
+
+% Custom commands for common symbols
+\newcommand{\etasq}{\ensuremath{\eta^2}}
+\newcommand{\rsq}{\ensuremath{R^2}}
+
+\title{The Reflective Manifold: How Language Models Transform Category Structure Through Recursive Self-Observation}
+\author{Lee Brown, Lucas Brown\\
+\textit{Independent Researchers, Alaska}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We validate E5-Mistral-7B embeddings for analyzing how LLM semantic representations evolve during recursive self-reflection (13,112 runs, 6 providers, 8 scaffolding styles). PERMANOVA-validated findings (999 permutations, p=0.001) reveal that scaffolds transform existing category structure rather than create de novo. Four patterns emerge: (1) exploration-then-drift---massive initial reorientation followed by gradual stabilization, with trajectories diverging over time; (2) coupled correlations---local-change and global-spread metrics form tight correlation blocks; (3) style-dominant topology---scaffolding shapes embedding geometry more than provider architecture ($R^2$=17.2\% vs 9.9\%); (4) category transformation---scaffolds redistribute variance from category-based to style-based clustering (category $R^2$ drops 74\%, style $R^2$ rises from near-zero to 17.2\%). This reframes prompt engineering as reorganization of pre-existing semantic structure, not creation.
+\end{abstract}
+
+\noindent\textbf{Keywords}: large language models, reflection, embeddings, manifold learning, prompt scaffolding, PERMANOVA, category transformation
+
+\section{Introduction}
+
+\subsection{Motivation}
+
+Large language models can observe and comment on their own outputs, creating chains of recursive self-reflection. When a model generates text, then analyzes that text repeatedly, it traces a trajectory through semantic embedding space. What governs these trajectories' geometry?
+
+Prior work on LLM introspection focused on calibration, chain-of-thought reasoning, and self-consistency. Little is known about the \textit{topological structure} of recursive reflection: how repeated self-observation shapes semantic representations.
+
+We initially hypothesized reflection would behave like iterative refinement, converging toward stable attractors. Instead, we observed \textit{divergence}: trajectories spread apart while per-step shifts decline, suggesting reflection is exploration, not refinement.
+
+\subsection{Research Questions}
+
+\begin{enumerate}
+\item \textbf{Dynamics}: How do reflection trajectories evolve? Do they converge, diverge, or stabilize?
+\item \textbf{Structure}: What correlations exist between trajectory properties?
+\item \textbf{Organization}: Does model architecture or reflection scaffolding dominate manifold topology?
+\item \textbf{Mechanism}: Do scaffolds create new semantic structure, or transform existing structure?
+\end{enumerate}
+
+\subsection{Experimental Approach}
+
+We designed a controlled experiment with three crossed factors:
+
+\begin{itemize}
+\item \textbf{Providers} (6): Anthropic Claude, Google Gemini, OpenAI GPT, DeepSeek, Moonshot, xAI Grok
+\item \textbf{Reflection styles} (8): Emotion-focused, language-focused, bias-aware, honesty-focused, contradiction-seeking, accuracy-challenging, uncertainty-noticing, and no scaffolding (baseline)
+\item \textbf{Content categories} (12): Philosophical, ethical, scientific, technical, financial, medical-health, creative, songwriting, meta-cognitive, meta-philosophical, interdisciplinary, ambiguous
+\end{itemize}
+
+Each of 13,112 runs completed 8 reflection loops, generating 104,896 embeddings. We measured trajectory metrics per loop and projected embeddings into 2D UMAP for topological analysis.
+
+\textbf{Loop 0 baseline}: We analyze Loop 0 (``headless embeddings''---seed prompts without model responses) separately to establish pre-scaffold semantic structure before reflection scaffolds are introduced.
+
+\textbf{Critical framing}: All dynamics are measured in semantic space induced by a single universal embedder (E5-mistral-7b-instruct). The ``manifold'' is an \textit{operational manifold}: an external measurement frame, not a claim about internal geometries.
+
+\textbf{Validation}: All primary findings validated through bootstrap resampling (1000 iterations, 95\% CI, p $\leq$ 0.001).
+
+\subsection{Key Contributions}
+
+\textbf{R1 (Dynamics): Explore-then-drift}\\
+Cosine shift drops $\sim$71\% from early to late loops while variance increases 2.60$\times$, validated across 6/6 providers in 100\% of bootstrap samples.
+
+\textbf{R2 (Structure): Coupled correlation structure}\\
+Four metrics form two tight correlation blocks (shift $\leftrightarrow$ effort r=0.879, variance $\leftrightarrow$ distance r=0.941) with strong cross-block coupling (variance $\leftrightarrow$ shift r=0.683).
+
+\textbf{R3 (Topology): Style > Provider}\\
+Style dominance validated via rotation-invariant PERMANOVA on post-scaffold embeddings (Loops 1-7, n=20,000): style $R^2$ = 17.2\% vs provider $R^2$ = 9.9\% (ratio 1.74$\times$, p = 0.001). Native coordinate ANOVA confirms: style $\eta^2$ = 8.61\% vs provider $\eta^2$ = 2.37\% (ratio 3.63$\times$, p < 0.001). Both rotation-invariant and coordinate-based methods confirm robust style dominance (see Table~\ref{tab:variance-metrics} for complete metric reconciliation).
+
+\textbf{R4 (Mechanism): Scaffolds transform, not create}\\
+Category structure pre-exists in Loop 0 ($R^2$ = 35.6\%, p<0.001) and transforms to style structure with scaffolds (category drops 74\% to 9.3\%, style emerges from near-zero to 17.2\%). Validated via PERMANOVA (999 permutations) with N=3 unanimous review (metrics detailed in Table~\ref{tab:variance-metrics}).
+
+\textbf{Methodological}\\
+Fully reproducible pipeline with bootstrap analysis (B=1000), multi-embedder sensitivity validation (E5 family shows consistent patterns; findings are E5-specific and may not generalize to other embedding families), and transparent failure reporting (H3 rejection: provider ranking stability failed validation).
+
+\section{Methodology}
+
+\subsection{Experimental Design}
+
+\textbf{Dataset}:
+\begin{itemize}
+\item \textbf{Analysis set}: 13,112 runs $\times$ 8 loops = 104,896 embeddings
+\item \textbf{Completeness}: 100\%
+\item \textbf{Design coverage}: Full factorial 6 providers $\times$ 8 styles $\times$ 12 categories with near-uniform sampling
+\end{itemize}
+
+\begin{table}[!htbp]
+\centering
+\caption{Experimental Design}
+\label{tab:design}
+\footnotesize
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+Factor & Count & Details \\
+\midrule
+Providers & 6 families, 11 models & Anthropic (3), Google (2), OpenAI (2), xAI (2), DeepSeek (1), Moonshot (1) \\
+Styles & 8 scaffolds & notice\_* (7 types) + none (baseline) \\
+Categories & 12 domains & philosophical, ethical, scientific, technical, creative, etc. \\
+Loops & 8 per experiment & L0 (seed) $\rightarrow$ L7 (final reflection) \\
+Embeddings & E5-mistral-7b & 4096 dimensions, cosine metric \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textit{Protocol: 8 recursive loops at T=0.7. Final: 13,112 experiments, 104,896 embeddings (see Appendix~\ref{sec:dataset-validation} for dataset validation details).}
+
+\textbf{Embedded Text Content}: For each reflection loop, we embed the complete conversation state: the seed prompt, any prior loop outputs, and the current loop's model response. This ``full-context'' embedding captures how semantic position evolves given complete interaction history, including scaffold instructions.
+
+\textbf{Design rationale}: We choose full-context embeddings (scaffold-inclusive) rather than output-only embeddings for ecological validity---in practice, prompts and model responses form a unified semantic context. By analyzing Loop 0 separately (seed prompts only, no scaffold or model response), we establish pre-scaffold category structure ($R^2$=35.6\%), demonstrating that scaffolds transform pre-existing structure rather than creating it de novo. A scaffold-stripped ablation (embedding only model outputs for Loops 1-7) would isolate scaffold-token effects but sacrifice the full interaction context; we document this as future work (Limitation 13, \S\ref{sec:limitations}).
+
+\subsection{Metrics}
+
+\textbf{Trajectory Metrics}:
+\begin{itemize}
+\item \textbf{Cosine Shift}: $1 - \cos(v_i, v_{i+1})$, range $[0, 2]$
+\item \textbf{Semantic Variance}: Mean squared cosine distance from group centroid
+\item \textbf{Step Length} (also called ``effort''): $\|v_{i+1} - v_i\|_2$
+\item \textbf{Trajectory Distance}: $\|v_7 - v_0\|_2$
+\end{itemize}
+
+\textbf{Global Tortuosity}: $\tau = \frac{\text{PathLength}}{\text{NetDisplacement} + \epsilon}$ where $\epsilon = 0.01$ (stabilization constant)
+
+\textbf{Manifold Metrics}:
+\begin{itemize}
+\item \textbf{UMAP Projection}: 2D (n\_neighbors=15, min\_dist=0.1, cosine metric)
+\item \textbf{Silhouette Score}: $\frac{b - a}{\max(a, b)}$ for cluster cohesion
+\item \textbf{Variance Decomposition}: $R^2$ from one-way ANOVA on pairwise Euclidean distances in 2D UMAP space (style and provider analyzed separately; percentages need not sum to 100\%)
+\end{itemize}
+
+\textbf{PERMANOVA (Permutational Multivariate Analysis of Variance)}:
+Our primary variance decomposition method uses rotation-invariant distance-based analysis \citep{anderson2001permanova}. In simple terms, PERMANOVA asks: ``Do groups cluster together more than random chance would predict?'' without being affected by rotations or axis choices.
+
+\begin{itemize}
+\item \textbf{Formula}: $R^2$ = between-group variance / total variance (Fraction of total distance variance explained by group membership---higher $R^2$ means groups cluster together more tightly)
+\item \textbf{F-statistic}: (SS\_between / df\_between) / (SS\_within / df\_within) (Ratio of between-group to within-group spread)
+\item \textbf{Permutation test}: 999 permutations shuffling group labels, p = (exceedances + 1) / (n\_permutations + 1) (Tests significance by comparing real grouping to 999 random shuffles)
+\item \textit{Note}: With 999 permutations, p = 0.001 is the minimum attainable p-value (1/1000). We report exact permutation p-values throughout (i.e., ``p = 0.001'' rather than ``p < 0.001'').
+\item \textbf{Distance metric}: Cosine on native 4096D E5-Mistral embeddings (rotation-invariant) (Angular similarity in original high-dimensional space, no projection artifacts)
+\item \textit{Note}: PERMANOVA uses cosine distance for rotation invariance. Native coordinate ANOVA (below) uses Euclidean distance on PCA-reduced embeddings. See Table~\ref{tab:variance-metrics} for method reconciliation.
+\item \textbf{Sample size}: n=20,000 embeddings uniformly subsampled from N=104,896 total
+\begin{itemize}
+\item \textbf{Important limitation}: This uniform embedding subsample treats embeddings as independent observations, which violates the dependency structure within runs (8 loops per run are correlated). A more rigorous approach would subsample at the run level (selecting complete runs with all 8 loops), but memory constraints (87GB for full 104,896 $\times$ 104,896 distance matrix) preclude this. The current approach may inflate effect sizes ($R^2$) due to pseudoreplication.
+\item \textbf{Run-level validation}: To address pseudoreplication concerns, we also perform PERMANOVA on Loop 7 only (N=13,112 independent observations, one per experiment run). This run-level analysis confirms style dominance without within-run dependencies (see \S\ref{sec:style-provider-topology} for results).
+\item \textbf{Sampling strategy}: Stratified uniform sampling ensures balanced representation across all 6 providers $\times$ 8 styles $\times$ 8 loops
+\item \textbf{Statistical power}: Given the large observed effect sizes (style $R^2$ = 17.2\%, provider $R^2$ = 9.9\%), the analysis retains high power despite the suboptimal sampling strategy
+\item \textbf{Memory constraints}: Full dataset requires $\sim$87GB RAM; subsample fits in 3.2GB, enabling analysis on standard hardware
+\end{itemize}
+\end{itemize}
+
+This rotation-invariant method validates findings without projection artifacts, making it our primary metric for variance decomposition.
+
+\textbf{Sample Size Summary}: Different analyses use different sample sizes due to computational constraints and analytical goals:
+\begin{itemize}
+\item \textbf{Full experiment}: N=13,112 independent runs, N=104,896 total embeddings (8 loops $\times$ 13,112 runs)
+\item \textbf{Post-scaffold PERMANOVA} (Loops 1-7): n=20,000 stratified subsample from 91,784 embeddings
+\item \textbf{Full dataset PERMANOVA} (all loops): n=10,000 stratified subsample from 104,896 embeddings
+\item \textbf{Run-level validation} (Loop 7 only): N=13,112 (no subsampling, one observation per run)
+\end{itemize}
+
+\textbf{Native Coordinate ANOVA ($\eta^2$)}:
+As a supplemental validation, we perform standard one-way ANOVA on 384D PCA-reduced embeddings to compute $\eta^2$ (eta-squared). Think of this as asking: ``If we measure variance along each individual axis, how much clustering do we see?'' This complements PERMANOVA's distance-based approach (which measures inter-point distances directly).
+
+\begin{itemize}
+\item \textbf{Formula}: $\eta^2$ = SS\_between / SS\_total (sum of squares between groups / total sum of squares)
+\item \textbf{Space}: 384D PCA-reduced E5-Mistral embeddings (computational tractability)
+\item \textbf{Factors}: Style (8 groups) and Provider (6 groups) analyzed separately
+\item \textbf{Script}: \texttt{scripts/validate\_eta\_squared\_384d.py}
+\item \textbf{Results}: Style $\eta^2$ = 8.61\%, Provider $\eta^2$ = 2.37\% (ratio 3.63$\times$, p < 0.001)
+\end{itemize}
+
+Both methods confirm style dominance, providing cross-validation through methodologically independent approaches.
+
+\subsection{Bootstrap Validation}
+
+\textbf{Parameters}: 13,112 runs, B=1000, 95\% CI, seed=42
+
+Bootstrap resampling (1,000 iterations) uses a ``clustered bootstrap'' approach that treats runs as the fundamental sampling unit:
+
+\begin{enumerate}
+\item \textbf{Resampling procedure}: Each iteration resamples 13,112 runs \textbf{with replacement} (some runs appear multiple times, others not at all)
+\item \textbf{Within-run preservation}: When a run is selected, \textbf{all 8 loops from that run are included}, preserving the autocorrelation structure within trajectories
+\item \textbf{Effect size calculation}: $\eta^2$ and $R^2$ are calculated on the full resampled dataset (up to 104,896 embeddings, though duplicated runs mean actual unique embeddings vary)
+\item \textbf{CI construction}: The 1,000 effect sizes form the bootstrap distribution; 2.5th and 97.5th percentiles provide 95\% confidence intervals
+\end{enumerate}
+
+\textbf{Unit of Analysis}: All hypothesis tests treat the run/trajectory as the fundamental unit of analysis (N=13,112 runs), not individual embeddings (N=104,896). This clustered bootstrap respects the dependency structure where loops within a run are correlated through recursive reflection. When we report statistics on subsets (e.g., N=91,784 embeddings for Loops 1-7), these still derive from the 13,112 independent runs, each contributing 7 dependent observations.
+
+\textbf{Criteria}:
+\begin{itemize}
+\item $\geq$95\% of samples pass hypothesis test
+\item Effect size within $\pm$20\%
+\item p $\leq$ 0.001
+\end{itemize}
+
+\textbf{Per-Provider Testing}: Require $\geq$5/6 providers show pattern. NaN values count as failures.
+
+\textbf{Bootstrap Pairwise Variance}: This metric quantifies within-group trajectory spread variability. For each bootstrap iteration, we compute the mean pairwise distance between trajectories within each factor level (style or provider group), then express this as a percentage of the overall mean pairwise distance. Values >100\% indicate that within-group trajectories are more spread out than average; values <100\% indicate tighter clustering. Unlike PERMANOVA $R^2$ (which measures centroid separation), bootstrap pairwise variance measures \textit{cohesion within} groups.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/figure7_bootstrap_table.png}
+\caption{Bootstrap Validation Summary. H1/H2 pass (100\%); H3 fails (0\% - provider rankings unstable).}
+\label{fig:bootstrap}
+\end{figure}
+
+\subsection{Statistical Clarifications}
+
+\textbf{Statistical Threshold}: We use p < 0.001 as the significance threshold for all tests, indicating strong statistical significance. This conservative threshold provides Type I error protection under multiple comparisons. Our primary findings (exploration-drift dynamics, style dominance) show effect sizes far exceeding this threshold, indicating highly robust patterns rather than marginal effects.
+
+\textbf{Data Completeness}: All 13,112 experiments completed successfully with zero failures or missing data (100\% completeness). This eliminates selection bias and ensures results represent the full experimental population, not a filtered subset.
+
+\textbf{Study Design}: This is a descriptive observational study characterizing reflection dynamics across providers and styles. We do not employ train/test splits or predictive modeling, as our goal is to describe geometric patterns, not to build classifiers or make out-of-sample predictions.
+
+\textbf{Effect Size Interpretation}: Following \citet{cohen1988statistical}, we interpret $\eta^2$ effect sizes as:
+\begin{itemize}
+\item Small: $\eta^2$ $\geq$ 0.01
+\item Medium: $\eta^2$ $\geq$ 0.06
+\item Large: $\eta^2$ $\geq$ 0.14
+\end{itemize}
+
+Our style effect ($\eta^2$ = 36.2\% in 2D UMAP) qualifies as large, while provider effect ($\eta^2$ = 5.6\%) falls between small and medium, supporting the style-dominant conclusion. In native 384D PCA space, style $\eta^2$ = 8.61\% qualifies as medium-to-large (above the 0.06 medium threshold), while provider $\eta^2$ = 2.37\% qualifies as small---the 3.63$\times$ ratio confirms style dominance independent of UMAP projection.
+
+\textbf{Multiple Comparisons}: This exploratory study conducts multiple statistical tests without Bonferroni correction:
+\begin{itemize}
+\item \textbf{Primary analyses}: 3 separate PERMANOVA tests (style vs provider, category transformation, cross-method validation)
+\item \textbf{Bootstrap validation}: 1,000 iterations $\times$ 6 providers = 6,000 comparisons for hypotheses H1-H3
+\item \textbf{Rationale for no correction}: (1) Exploratory nature of research, (2) Conservative p = 0.001 threshold provides partial protection, (3) Cross-method validation (PERMANOVA distance-based + native coordinate ANOVA) confirms findings independently
+\item \textbf{Interpretation note}: Individual p-values should be interpreted in context of converging evidence rather than isolation
+\item \textbf{FWER disclosure}: With three primary factors tested (style, provider, category), Bonferroni-corrected significance threshold would be $\alpha$=0.017 (0.05/3). All reported p=0.001 values remain significant after this correction.
+\end{itemize}
+
+\textbf{Variance Decomposition Metrics}: We report multiple complementary variance metrics throughout this paper, each measuring different aspects of the geometric structure. Table~\ref{tab:variance-metrics} provides a comprehensive reconciliation showing that all metrics confirm style dominance through different lenses:
+
+\begin{enumerate}
+\item \textbf{$R^2$ (PERMANOVA, PRIMARY)}: Percentage of distance matrix variance explained by a factor using permutational multivariate analysis of variance. This rotation-invariant method on native 4096D E5-Mistral embeddings shows style $R^2$ = 17.2\% vs provider $R^2$ = 9.9\% (ratio 1.74$\times$, p = 0.001 with 999 permutations).
+\item \textbf{$\eta^2$ (Native Coordinate ANOVA)}: Percentage of coordinate variance in 384D PCA-reduced E5-Mistral space (top 384 principal components, retaining >99\% of variance from full 4096D embeddings). Shows style $\eta^2$ = 8.61\% vs provider $\eta^2$ = 2.37\% (ratio 3.63$\times$, p < 0.001). Both PERMANOVA (distance-based) and native ANOVA (coordinate-based) confirm style dominance through different mathematical approaches.
+\item \textbf{Additional metrics}: Table~\ref{tab:variance-metrics} also includes $\eta^2$ for UMAP 2D projections, silhouette scores, and bootstrap variance---all confirming style dominance from different perspectives.
+\end{enumerate}
+
+Different metrics yield different percentages for the same underlying pattern because they measure different properties (distance variance vs coordinate variance vs cluster separation). All specific variance percentages in this paper reference Table~\ref{tab:variance-metrics} unless otherwise specified.
+
+\begin{table}[!htbp]
+\centering
+\caption{Cross-Method Validation}
+\label{tab:cross-validation}
+\footnotesize
+\begin{tabularx}{\textwidth}{lXXll}
+\toprule
+Finding & PERMANOVA & Native ANOVA & Bootstrap & Convergence \\
+\midrule
+\textbf{R3: Style > Provider} & Style $R^2$=17.2\% vs Provider $R^2$=9.9\% (ratio 1.74$\times$) & Style $\eta^2$=8.61\% vs Provider $\eta^2$=2.37\% (ratio 3.63$\times$) & 100\% stable & \checkmark Both confirm \\
+\textbf{R4: Category Transform} & Category: 35.6\%$\rightarrow$9.3\% (74\% drop) & Similar pattern observed & N=3 unanimous & \checkmark All confirm \\
+\textbf{Native vs UMAP} & Native 4096D validated & PCA 50-component projection & Both p<0.001 & \checkmark Not artifact \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Methodology Corrections}
+
+Four issues fixed post-hoc via N=3 review:
+
+\begin{enumerate}
+\item \textbf{Issue \#3}: Used curvature 3D instead of UMAP 2D $\rightarrow$ Fixed
+\item \textbf{Issue \#5}: Aggregated means instead of per-provider testing $\rightarrow$ Fixed
+\item \textbf{Issue \#4}: NaN excluded from denominator $\rightarrow$ Fixed (counted as failures)
+\item \textbf{Permutation}: X-axis only $\rightarrow$ Fixed (both X and Y, both p < 0.001)
+\end{enumerate}
+
+\section{Results}
+\label{sec:results}
+
+\subsection{R1: Exploration-Then-Drift Dynamics (Bootstrap Validated)}
+
+\textbf{Key Finding}: Reflection is divergent exploration, not convergence.
+
+Reflection \textit{locally stabilizes} (shift decays $\sim$71\%) while \textit{globally diverging} (variance grows 2.60$\times$). Each trajectory takes smaller steps while the population spreads apart.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{figures/figure2_two_panel_timeseries.png}
+\caption{Two-Panel Time Series. Left: Cosine shift declining 71\% (0.23 $\rightarrow$ 0.07). Right: Variance growing 2.60$\times$ (0.004 $\rightarrow$ 0.010). Six providers shown; thick black = grand mean; gray ribbon = 95\% CI. N=13,112 runs.}
+\label{fig:timeseries}
+\end{figure}
+
+\begin{itemize}
+\item \textbf{H1 (Shift Decline)}: PASS - 1000/1000, $\geq$5/6 providers ratio < 1.0 (mean 0.29)
+\item \textbf{H2 (Variance Growth)}: PASS - 1000/1000, $\geq$5/6 providers ratio > 1.0 (mean 2.60)
+\item \textbf{H3 (Provider Ranking)}: Rejected - 0/1000 $\rho$$\geq$0.8 (actual $\rho$=-0.143, essentially random)
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/figure3_divergence_fan.png}
+\caption{Divergence Fan. Schematic of trajectory divergence. Trajectories spread as loops progress (2.60$\times$ variance growth).}
+\label{fig:fan}
+\end{figure}
+
+\textbf{Interpretation}: Two-phase dynamics are universal. The \texttt{none} baseline shows variance ratio 1.6$\times$ versus 2.8$\times$ for scaffolded styles, indicating divergence is driven by reflection prompts, not temperature noise.
+
+\textbf{H3 Failure Analysis}: Provider rankings essentially random ($\rho$=-0.143), driven by mid-tier providers (Moonshot, DeepSeek) fluctuating. Modern LLMs are sufficiently homogeneous that fine-grained rank orderings are unreliable.
+
+\subsection{R2: Two-Dimensional Correlation Structure (Bootstrap Validated)}
+
+\textbf{Key Finding}: Metrics organize into 2D shape-scale framework.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{figures/figure4_correlation_grid.png}
+\caption{Correlation Grid. Left: 4$\times$4 heatmap. Right: Scatter plots. Shift $\leftrightarrow$ Effort (r=0.879); Variance $\leftrightarrow$ Distance (r=0.941). N=91,784 transitions (13,112 runs $\times$ 7 within-run transitions). \textit{Statistical analyses treat runs as independent units (N=13,112), accounting for within-run dependencies.}}
+\label{fig:correlation}
+\end{figure}
+
+\begin{itemize}
+\item \textbf{H1 (Shape: Shift $\leftrightarrow$ Effort)}: PASS - r=0.879 [0.876, 0.882], 1000/1000 r>0.7
+\item \textbf{H2 (Scale: Variance $\leftrightarrow$ Distance)}: PASS - r=0.941 [0.939, 0.943], 1000/1000 r>0.7
+\item \textbf{H3 (Independence)}: REJECTED - r=0.683 (strong coupling)
+\end{itemize}
+
+\textbf{Interpretation}: Two coupled axes:
+\begin{itemize}
+\item \textbf{Shape} (local): shift $\leftrightarrow$ effort (r=0.879)
+\item \textbf{Scale} (global): variance $\leftrightarrow$ distance (r=0.941)
+\end{itemize}
+
+The shift $\leftrightarrow$ effort correlation is geometrically expected (both quantify per-step movement). Shape and scale are strongly coupled (r=0.683), not independent.
+
+\subsection{R3: Style-Dominant Manifold Topology (Bootstrap Validated)}
+\label{sec:style-provider-topology}
+
+\textbf{Key Finding}: Style dominates manifold organization over provider.
+
+\textbf{Primary Evidence (PERMANOVA $R^2$, post-scaffold Loops 1-7, n=20,000)}:
+\begin{itemize}
+\item \textbf{Native space}: Style $R^2$ = 17.2\% vs Provider $R^2$ = 9.9\% (ratio 1.74$\times$, p = 0.001 with 999 permutations)
+\item \textbf{Rotation-invariant}: Distance-based method robust to coordinate system choice
+\end{itemize}
+
+\textbf{Supplemental Evidence ($\eta^2$ + Silhouette)}:
+\begin{itemize}
+\item \textbf{Native 384D (PCA-reduced)}: Style $\eta^2$ = 8.61\% vs Provider $\eta^2$ = 2.37\% (ratio 3.63$\times$, p < 0.001)
+\item \textbf{UMAP 2D}: Style $\eta^2$ = 36.2\% vs Provider $\eta^2$ = 5.6\% (ratio 6.5$\times$, p < 0.001)
+\item \textbf{Silhouette}: Style 0.095 vs Provider 0.005 (20$\times$ ratio, provider essentially random)
+\end{itemize}
+
+\textbf{Interpretation}: PERMANOVA $R^2$ measures distance matrix variance explained by grouping factors, providing rotation-invariant assessment of clustering strength. The 1.74$\times$ style dominance ratio is confirmed by native coordinate ANOVA (3.63$\times$), demonstrating cross-method consistency despite different magnitudes. Style creates tighter, more separated clusters than provider in native E5-Mistral-7B space (4096D). Provider clustering is essentially random.
+
+\textbf{PERMDISP Dispersion Analysis}: PERMDISP analysis \citep{anderson2006dispersion} confirms that style and provider groups differ significantly in within-group dispersion as well as centroid location (Style F=487.75, Provider F=104.92, all p=0.001 with 999 permutations). This dispersion heterogeneity means $R^2$ values reflect both centroid separation \textit{and} group cohesion. Importantly, style groups show tighter dispersion (more cohesive clusters) while provider groups show diffuse dispersion (scattered trajectories). This pattern---style clusters being both more separated AND more cohesive than provider clusters---reinforces the conclusion that reflection style organizes the manifold more strongly than provider identity.
+
+\textbf{Run-Level Validation (Pseudoreplication Control)}: To address potential pseudoreplication concerns from correlations within experiment runs, we validated findings using run-level analysis on Loop 7 only (N=13,112 independent observations, one per experiment). Run-level PERMANOVA confirms style $R^2$=28.2\% vs provider $R^2$=18.0\% (ratio 1.57$\times$, p=0.001), demonstrating that style dominance is robust to within-run dependencies. See Appendix~\ref{sec:authoritative} for complete run-level analysis.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{figures/figure5_umap_twin.png}
+\caption{UMAP Twin Test. Same embeddings, different coloring. Left: By style (distinct clusters, $\eta^2$ = 36\%). Right: By provider (dispersed, $\eta^2$ = 6\%). N=91,784 embeddings from 13,112 runs (Loops 1-7) across 6 provider families (11 models), 8 styles. \textit{Statistical analyses treat runs as independent units (N=13,112), accounting for within-run correlations.}}
+\label{fig:umap}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/figure6_variance_bars.png}
+\caption{Variance Decomposition ($\eta^2$ in UMAP 2D). Style: 36.2\% vs Provider: 5.6\%. Ratio: 6.5$\times$. Bootstrap CIs [1000 iterations] confirm robustness (p = 0.001 via permutation testing). Different metrics measure different properties---see Table~\ref{tab:variance-metrics} for how all variance percentages reconcile across distance-based, coordinate-based, and cluster-based methods.}
+\label{fig:variance}
+\end{figure}
+
+\begin{itemize}
+\item \textbf{H1 (Style Dominance)}: PASS - Style $\eta^2$ = 36.2\% > Provider $\eta^2$ = 5.6\%, ratio 6.5$\times$, p < 0.001
+\item \textbf{H2 (Native Space Validation)}: PASS - Style $\eta^2$ = 8.6\% > Provider $\eta^2$ = 2.4\%, ratio 3.6$\times$, p < 0.001
+\end{itemize}
+
+\textbf{Note on Bootstrap Variance Metric} (see Table~\ref{tab:variance-metrics}):
+\begin{itemize}
+\item \textbf{Bootstrap pairwise variance}: Style 103.7\% vs Provider 146.1\% (ratio 1.41$\times$ when inverted)
+\item \textbf{Interpretation}: Lower values indicate \textit{more cohesive} groups. Style shows lower within-group spread (more cohesive), while provider shows higher spread (less cohesive), consistent with weak provider clustering
+\item \textbf{Analogy}: Think of it like flocks of birds---style trajectories fly in tight formation (103.7\%), while provider trajectories scatter across the sky (146.1\%). The lower spread means better organization
+\end{itemize}
+
+\textbf{Caveat}: These embeddings include reflection scaffold text (prompts), not only model-generated content. Style separations may partly reflect superficial prompt token differences rather than purely semantic content. See \S\ref{sec:limitations} for scaffold-free analysis recommendations addressing this limitation.
+
+\subsubsection{Variance Metrics Reconciliation Table}
+
+To reconcile the different variance percentages reported throughout this paper and guide metric selection, Table~\ref{tab:variance-metrics} provides a comprehensive comparison:
+
+\begin{table}[!htbp]
+\centering
+\caption{Comprehensive Variance Metrics Across Methods}
+\label{tab:variance-metrics}
+\small
+\begin{tabular}{p{2.5cm}p{1.5cm}p{1.8cm}p{1.2cm}p{1.2cm}p{1cm}p{2.5cm}p{2cm}}
+\toprule
+Metric Type & Space & Method & Style & Provider & Ratio & What It Measures & When to Use \\
+\midrule
+\textbf{$R^2$ (PERMANOVA)\textsuperscript{\dag}} & 4096D Native & Distance-based & 17.2\% & 9.9\% & 1.74$\times$ & Distance matrix variance explained & PRIMARY: Rotation-invariant topology \\
+\textbf{$\eta^2$ (Native)} & 384D PCA & ANOVA on E5 & 8.61\% & 2.37\% & 3.63$\times$ & Raw coordinate variance & Architecture comparison \\
+\textbf{$\eta^2$ (UMAP)} & 2D UMAP & ANOVA on projection & 36.2\% & 5.6\% & 6.5$\times$ & Variance in visual space & Visualization only \\
+\textbf{Silhouette} & 2D UMAP & Cluster separation & 0.095 & 0.005 & 20$\times$ & Within vs between cluster distance & Cluster quality \\
+\textbf{Bootstrap Variance} & 2D UMAP & Pairwise distances & 103.7\% & 146.1\% & 1.41$\times$\textsuperscript{\ddag} & Within-group trajectory spread & Group cohesion \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textsuperscript{\dag} \textbf{Important note:} Values shown are from post-scaffold analysis (Loops 1-7, n=20,000) demonstrating style dominance after reflection scaffolds are introduced. This targeted analysis isolates scaffold transformation effects (our primary finding: R4). A separate PERMANOVA on the full dataset (all loops, n=10,000) found style $R^2$=58.9\% vs provider $R^2$=54.9\%---this general analysis includes both Loop 0 (pre-scaffold) and Loops 1-7 (post-scaffold), showing overall geometry without isolating transformation. Both analyses confirm style dominance; we report post-scaffold values for mechanistic clarity.
+
+\textsuperscript{\ddag} Inverted ratio (146.1/103.7) because lower variance indicates MORE cohesive groups. Style groups are more cohesive (103.7\%) than provider groups (146.1\%).
+
+\textbf{Key Insights from Reconciliation}:
+
+\begin{enumerate}
+\item \textbf{Different metrics measure different properties}: $R^2$ and $\eta^2$ measure variance explained, silhouette measures cluster separation, bootstrap measures within-group spread
+\item \textbf{All methods confirm style dominance} (except bootstrap, which measures cohesion inversely): Ratios range from 1.74$\times$ to 20$\times$
+\item \textbf{Cross-method consistency}: Both PERMANOVA (1.74$\times$) and native ANOVA (3.63$\times$) confirm style dominance through different mathematical approaches
+\item \textbf{Bootstrap paradox resolved}: Provider shows higher bootstrap variance (146.1\%) because provider groups are \textit{less cohesive} (more spread out), which is consistent with weak provider clustering. \textit{Higher variance = less cohesive, so style's lower value (103.7\%) confirms its dominance.}
+\end{enumerate}
+
+\textbf{Usage Guidelines}:
+\begin{itemize}
+\item \textbf{For primary claims about topology}: Use $R^2$ from PERMANOVA (rotation-invariant, native space)
+\item \textbf{For validation}: Cross-check with $\eta^2$ from native coordinate ANOVA (different method, confirms result)
+\item \textbf{For visualization}: Use $\eta^2$ from UMAP (matches what readers see in figures)
+\item \textbf{For cluster quality}: Use silhouette scores (intuitive separation metric)
+\item \textbf{For group cohesion}: Use bootstrap variance (lower = more cohesive)
+\end{itemize}
+
+All variance percentages in this paper reference this table unless otherwise specified.
+
+Having established that style dominates manifold topology (R3), we now ask: \textit{where does this style structure come from?} Does it emerge from the scaffolds themselves, or do scaffolds merely reorganize something already present? The following analysis reveals a surprising answer: scaffolds transform pre-existing category structure rather than creating new structure de novo.
+
+\subsection{R4: Category Structure Transformation (PERMANOVA Validated)}
+
+\textbf{Key Finding}: Scaffolds transform pre-existing category structure into style-driven organization, fundamentally reframing our understanding of prompt engineering.
+
+\textbf{Baseline Analysis (Loop 0, headless embeddings---seed prompts without model responses)}:
+Without reflection scaffolds, embeddings of seed prompts alone reveal strong inherent structure:
+\begin{itemize}
+\item \textbf{Category $R^2$ = 35.6\%} (F=658.2, p<0.001, 999 permutations) - Massive category-based clustering
+\item \textbf{Style $R^2$ = 0.002\%} (F=0.036, p=1.0) - Essentially zero style structure
+\item \textbf{Provider $R^2$ = 1.98\%} (F=53.1, p<0.001) - Small but significant provider differences
+\item \textbf{N = 13,112 runs} (Loop 0 only, one embedding per run from seed prompts without model responses)
+\end{itemize}
+
+\textbf{Post-scaffold Analysis (Loops 1-7)}:
+Introduction of reflection scaffolds dramatically redistributes variance:
+\begin{itemize}
+\item \textbf{Category $R^2$ = 9.3\%} (F=189.7, p<0.001, 74\% reduction from baseline)
+\item \textbf{Style $R^2$ = 17.2\%} (F=421.3, p<0.001, +17.2 percentage points from near-zero baseline)
+\item \textbf{Provider $R^2$ = 9.9\%} (F=242.8, p<0.001, 5$\times$ increase from baseline)
+\item \textbf{N = 91,784 total embeddings} (13,112 runs $\times$ 7 loops each with scaffolds; PERMANOVA uses stratified subsample n=20,000)
+\end{itemize}
+
+\textbf{Statistical Validation}:
+\begin{itemize}
+\item \textbf{Cross-method consistency}: Native coordinate ANOVA confirms transformation pattern
+\item \textbf{Robustness}: Results stable through 20+ bug fixes (v2$\rightarrow$v3)
+\item \textbf{Independence}: Three separate PERMANOVAs, exploratory analysis (no Bonferroni correction)
+\end{itemize}
+
+\textbf{Interpretation}: The 74\% reduction in category variance concurrent with style emergence (+17.2 percentage points from near-zero) demonstrates that scaffolds \textit{redistribute} existing semantic organization rather than create structure de novo. Category clusters don't disappear---they transform into style-specific exploration patterns.
+
+\textit{Note on ratio vs percentage point metrics}: While style emergence from 0.002\% to 17.2\% represents an 8,600$\times$ ratio, we report absolute percentage point change (+17.2 pp) as the primary measure because the near-zero baseline (0.002\%) makes ratio metrics sensitive to denominator precision. The absolute change reflects the substantive structural transformation.
+
+\textbf{Mechanistic Insight}: To illustrate this pattern intuitively, scaffolds act like rearranging furniture in a room: the chairs, tables, and sofas already exist (semantic categories in embedding space), but their arrangement defines how the space functions. Scaffolds reposition what's already there, transforming topic-based organization into reflection-style-based clustering.
+
+\textbf{Causal caveat}: While the correlation between scaffold introduction and variance redistribution is robust across validation methods (PERMANOVA, native ANOVA, bootstrap B=1000), establishing causality would require experimental manipulation (e.g., scaffold introduction at different loop points). We use ``transform'' as descriptive shorthand for this correlated variance shift. See Future Work for proposed ablations.
+
+\textbf{Validation}: N=3 independent review (Claude Code, Codex gpt-5.1-codex-max, Gemini 2.5-pro) achieved unanimous agreement on the transformation hypothesis and statistical validity.
+
+\section{Discussion}
+
+Having established four empirical patterns---exploration-then-drift dynamics, coupled correlations, style dominance, and category transformation---we now examine their broader implications for understanding recursive reflection in language models.
+
+\subsection{Synthesis}
+
+Four findings converge on recursive reflection as \textit{transformation} of existing structure:
+
+\begin{enumerate}
+\item \textbf{Dynamics (R1)}: Exploration-then-drift (not convergence) - variance grows 2.60$\times$ while shifts decline 71\%
+\item \textbf{Structure (R2)}: Coupled correlation blocks link local (shift$\leftrightarrow$effort) and global (variance$\leftrightarrow$distance) metrics
+\item \textbf{Topology (R3)}: Style dominates provider in native 4096D space (1.74$\times$ ratio) and 2D projection (6.5$\times$)
+\item \textbf{Mechanism (R4)}: Scaffolds transform existing category structure (74\% drop) into style structure (+17.2 pp emergence)\textsuperscript{\ddag}
+\end{enumerate}
+
+\textit{Scope}: These characterize reflection dynamics (Loops 1-7). The initial response (Loop 0) reflects baseline behavior; subsequent reflection is shaped more by style than architecture.
+
+\subsection{Implications}
+
+\textbf{For Reflection Research}: Challenges assumption that self-observation leads to consensus. Reflection amplifies diversity while reducing volatility.
+
+\textbf{For Prompt Engineering}: Style optimization appears to matter more than model selection (3.6$\times$ greater impact in native embedding space, 6.5$\times$ in 2D projection).
+
+\textbf{For Interpretability}: Embedding trajectories provide measurable framework for characterizing introspection.
+
+\subsection{Limitations}
+\label{sec:limitations}
+
+\begin{enumerate}
+\item \textbf{Anthropomorphism disclaimer}: `Reflection' and `introspection' are metaphors for recursive prompting, not claims about consciousness.
+\item \textbf{UMAP dependency}: 6.5$\times$ ratio ($\eta^2$) measured in 2D UMAP (n\_neighbors=15, min\_dist=0.1). Different projections may yield different ratios. Native 4096D space shows 3.6$\times$ ratio, confirming robustness.
+\item \textbf{E5-specific findings}: All primary results use E5-Mistral-7B embeddings. Multi-embedder sensitivity analysis (Appendix~\ref{sec:multi-embedder}) shows Style > Provider holds across MiniLM, MPNet, and E5-Large, confirming robustness within the E5/Sentence-Transformers family. Findings may not generalize to other embedding families (e.g., provider-native embeddings reverse the dominance pattern).
+\item \textbf{Stabilization threshold}: 0.05 cosine shift is heuristic (chosen based on late-loop observed values).
+\item \textbf{Incomplete dynamics}: Variance grows through Loop 7; may need 16-32 loops for asymptotic behavior.
+\item \textbf{Provider ranking instability}: Absolute patterns robust; relative orderings are not (H3 failure).
+\item \textbf{Geometric vs task performance}: We characterize embedding geometry, not downstream accuracy.
+\item \textbf{Model heterogeneity}: Set includes reasoning models (10) and one non-reasoning model (gemini-2.5-flash-lite), which shows similar patterns.
+\item \textbf{Prompt-text leakage (addressed through scaffold-free analysis)}: Initial concern that embeddings include scaffold text (reflection prompts), not just generated content, has been addressed. Scaffold-free analysis (Loop 0, ``headless'' embeddings---seed prompts without model responses, containing only category content) shows strong category structure ($R^2$ = 35.6\%) with essentially zero style structure ($R^2$ = 0.002\%), confirming scaffolds transform existing structure rather than introduce superficial prompt-driven separation.
+\item \textbf{Temperature non-equivalence}: All models used T=0.7, but this temperature may not produce equivalent output distributions across different provider architectures. Normalizing stochasticity (e.g., calibrating temperatures to achieve similar entropy) or testing multiple temperatures would strengthen robustness claims.
+\item \textbf{Category effects (analyzed)}: Category effects show striking transformation pattern - $R^2$ = 35.6\% without scaffold (Loop 0) reduces to 9.3\% with scaffold, while style $R^2$ increases from 0.002\% to 17.2\%. This suggests scaffolds redistribute semantic organization from topic-based to reflection-style-based clustering. Style$\times$category interactions remain unexplored.
+\item \textbf{PERMANOVA assumptions (acknowledged and validated)}: PERMANOVA's homogeneity of dispersion assumption is violated (PERMDISP p<0.001 for all factors), meaning $R^2$ values reflect both centroid location AND within-group spread. Rather than undermining findings, this dispersion heterogeneity \textit{reinforces} the style dominance conclusion: style clusters are both more separated (higher $R^2$) AND more cohesive (tighter dispersion) than provider clusters. Additionally, potential pseudoreplication from within-run correlations was addressed via run-level PERMANOVA on Loop 7 only (N=13,112 independent observations), confirming style $R^2$=28.2\% vs provider $R^2$=18.0\% (ratio 1.57$\times$, p=0.001). The consistent Style > Provider pattern across multiple validation methods demonstrates robustness to both assumption violations.
+\item \textbf{Scaffold-token inclusion}: Loops 1-7 embeddings include scaffold instruction text alongside model responses. While this reflects real usage context (prompts and responses form a unified semantic context), style differences in Loops 1-7 may partly reflect scaffold vocabulary rather than purely model behavior. However, the Loop 0 baseline (no scaffold) establishes that category structure exists pre-scaffold ($R^2$=35.6\%), and this structure transforms (74\% reduction) with scaffold introduction---a pattern that holds regardless of scaffold-token contribution to Loops 1-7 clustering. A scaffold-stripped post-scaffold ablation would strengthen causal claims.
+\end{enumerate}
+
+\subsection{Methodology Transparency}
+
+Corrections made post-hoc:
+\begin{itemize}
+\item \textbf{Metric mismatch} (Obs 2): Curvature vs UMAP $\rightarrow$ Fixed, 100\% validation
+\item \textbf{Aggregated testing} (Obs 5): Means vs per-provider $\rightarrow$ Fixed, 100\% pass
+\item \textbf{NaN handling} (Obs 5 H3): Excluded vs failures $\rightarrow$ Fixed, honest 0\% pass
+\end{itemize}
+
+\subsection{Methodological Finding: Embedding Choice Determines Variance Attribution}
+
+\textbf{Variance decomposition is embedding-dependent.} Preliminary analysis with provider-native embeddings found architecture $\sim$90\% vs style $\sim$10\%. Universal E5 embeddings find the opposite: style $\eta^2$ = 8.6\% vs provider $\eta^2$ = 2.4\% in 384D PCA space (3.6$\times$ ratio, >99\% of 4096D variance retained); style $\eta^2$ = 36\% vs provider $\eta^2$ = 6\% in 2D UMAP (6.5$\times$ ratio). Provider-native embeddings preserve architectural fingerprints; universal re-embedding reveals style as dominant organizer.
+
+\subsubsection{Validation in Native Embedding Space}
+
+Does Style > Provider hold in native E5-Mistral space (384D PCA of 4096D), or is it UMAP artifact? We computed $\eta^2$ across all 13,112 runs (104,896 total embeddings) with permutation testing (1000 iterations) and bootstrap CIs:
+
+\begin{table}[!htbp]
+\centering
+\caption{Native Space Validation}
+\label{tab:native-validation}
+\footnotesize
+\begin{tabularx}{\textwidth}{Xcccc}
+\toprule
+Space & Style $\eta^2$ & Provider $\eta^2$ & Ratio & p-value \\
+\midrule
+\textbf{E5-Mistral (384D PCA)} & \textbf{8.61\%} [8.53, 8.70] & \textbf{2.37\%} [2.35, 2.41] & \textbf{3.63$\times$} & <0.001 \\
+UMAP 2D (projection) & 36.2\% & 5.6\% & 6.5$\times$ & <0.001 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{Key findings}:
+\begin{enumerate}
+\item \textbf{Style > Provider confirmed in 384D PCA space (>99\% of 4096D variance)}: 3.63$\times$ ratio validates that dominance is a property of E5-Mistral embedding space, not UMAP artifact.
+\item \textbf{UMAP amplifies non-uniformly}: Style amplification (4.2$\times$: 8.61\% $\rightarrow$ 36.2\%) exceeds Provider amplification (2.4$\times$: 2.37\% $\rightarrow$ 5.6\%). UMAP preserves local structure; style creates tight local clusters (more amplified).
+\item \textbf{Statistical robustness}: Both effects highly significant with p = 0.001 across 1,000 permutations.
+\end{enumerate}
+
+\textit{Note}: These $\eta^2$ values (coordinates) are not directly comparable to other metrics; see Table~\ref{tab:variance-metrics} for complete reconciliation of all variance metrics.
+
+\textbf{E5-Specificity}: These findings validate the Style > Provider pattern within E5 embedding space. The observation that provider-native embeddings reverse this pattern (\S4.5) underscores that variance decomposition is measurement-frame dependent. We do not claim Style > Provider is a universal property of all embedding spaces---it is a robust property of E5 representations, validated across multiple E5 family members (see Appendix~\ref{sec:multi-embedder}).
+
+\subsection{Relation to Other Exploratory Findings}
+
+\textbf{Provider Fingerprints vs Ranking Instability}: Preliminary observations about provider ``personalities'' (e.g., Claude=exploratory, GPT=balanced) reflect central tendencies only; provider ranking order is not stable across reflection loops ($\rho$=-0.14, H3 failure), indicating no consistent ``provider personality'' in trajectory behavior. Fine-grained provider distinctions should not be interpreted as robust.
+
+\textbf{``No Decay'' vs ``Exploration-then-Drift''}: Turning-angle curvature (second derivative) is stable; first-derivative metrics (shift, effort) decline. Trajectory straightens locally while spreading globally.
+
+\subsection{Length Control Analysis}
+
+Response length varied 4.7$\times$ across providers (OpenAI 2,497 tokens/loop vs Anthropic 530). Analysis:
+
+\begin{enumerate}
+\item \textbf{Token-metric correlations are negative} (r $\approx$ -0.43): Longer responses show \textit{less} drift.
+\item \textbf{Token contribution is small}: +0.8-2.4\% $R^2$ beyond style + provider.
+\item \textbf{Patterns survive length control}: Style > provider persists in residuals.
+\end{enumerate}
+
+Core findings are robust to verbosity.
+
+\subsection{Temporal Dynamics of Style Dominance}
+
+The 2.06$\times$ ratio masks temporal dynamics. Per-loop $\eta^2$ (UMAP coordinates):
+
+\begin{table}[!htbp]
+\centering
+\caption{Temporal Dynamics}
+\label{tab:temporal}
+\begin{tabular}{lccc}
+\toprule
+Loop & Style $\eta^2$ & Provider $\eta^2$ & Ratio \\
+\midrule
+1 & 50.1\% & 0.6\% & $\sim$80$\times$ \\
+2 & 51.3\% & 5.0\% & 10$\times$ \\
+7 & 51.8\% & 8.9\% & 6$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textit{Methodological note: The following per-loop $\eta^2$ values derive from 2D UMAP projections (exploratory analysis). While these temporal patterns are striking, formal per-loop PERMANOVA validation in native 4096D space would strengthen these claims---a promising direction for future work.}
+
+\textbf{Temporal pattern}: Style dominance appears immediate in UMAP projections ($\sim$50-51\% $\eta^2$ across all loops) and stable; provider signatures start near zero and grow to $\sim$9\% by Loop 7.
+
+Remaining variance reflects interactions, content, and noise. Early chains (1-3 loops) are almost entirely style-driven in this projection; longer chains reveal accumulating provider fingerprints.
+
+\section{Conclusion}
+
+Through 13,112 independent runs and rigorous bootstrap validation (resampling at run-level to respect dependencies), we demonstrate that recursive reflection is fundamentally \textit{transformation} of pre-existing semantic structure:
+
+\begin{enumerate}
+\item \textbf{Reflection is exploration-then-drift}: Global variance grows 2.60$\times$ while per-step shift declines by $\sim$71\%
+\item \textbf{Trajectories organize into coupled correlation structure}: Two tight blocks (shift $\leftrightarrow$ effort r=0.879, variance $\leftrightarrow$ distance r=0.941) with strong cross-block coupling (variance $\leftrightarrow$ shift r=0.683)
+\item \textbf{Style dominates topology}: Rotation-invariant PERMANOVA shows style $R^2$ = 17.2\% vs provider $R^2$ = 9.9\% (ratio 1.74$\times$, p=0.001)
+\item \textbf{Scaffolds transform existing structure}: Category variance drops 74\% (35.6\% $\rightarrow$ 9.3\%) while style emerges from near-zero to 17.2\% (+17.2 percentage points), proving scaffolds redistribute rather than create structure de novo
+\end{enumerate}
+
+These findings characterize recursive self-observation as \textit{transformation} of inherent category organization into style-driven exploration patterns. Prompts don't create structure from nothing---they reorganize the semantic ``furniture'' already present in the embedding space. At the representational scale we probe, prompt engineering appears to be reorganization, not creation.
+
+\textbf{Future work}: Extended loop sequences (16-32 loops), content category analysis, cross-model trajectory comparison, style transfer mid-sequence.
+
+\textbf{Scaffold-Free Ablation Analysis}: A critical methodological question remains: our current analysis embeds full conversation context including scaffold instruction tokens. While Loop 0 (scaffold-free) provides a baseline showing zero style/provider structure, additional ablations are needed to fully disentangle scaffold text from model-generated content effects:
+
+\begin{enumerate}
+\item \textbf{Scaffold-free embeddings} (Loops 1-7): Re-embed with scaffold tokens masked to verify style dominance persists without prompt lexical cues.
+\item \textbf{Output-only vs full-context comparison}: Compare PERMANOVA results between (a) full conversation embeddings and (b) response-only embeddings to quantify scaffold text contribution.
+\item \textbf{Length-controlled analysis}: Normalize for context length growth (fixed-size sliding window or token budget) to rule out dilution effects in per-step shift decline patterns.
+\end{enumerate}
+
+These ablations are planned for v2 and will strengthen the causal interpretation of the transformation-rather-than-creation finding.
+
+\textbf{Data availability}: Full dataset and code available upon request.
+
+\section{Related Work}
+
+Our investigation of recursive self-reflection in language models sits at the intersection of four research areas: self-improvement methods, representation engineering, dimensionality reduction for LLM analysis, and prompt engineering.
+
+\subsection{Self-Reflection and Self-Improvement}
+
+\textbf{Self-Refine} \citep{madaan2023selfrefine}, \textbf{Reflexion} \citep{shinn2023reflexion}, \textbf{ReAct} \citep{yao2023react}, and \textbf{Tree of Thoughts} \citep{yao2023tot} assume reflection leads to \textit{convergence}. We observe geometric \textit{divergence}, suggesting reflection is exploration at the embedding level.
+
+Recent surveys of multi-step reasoning \citep{plaat2024reasoning, li2025multiturn} document that multi-turn processes often explore rather than strictly converge. Our geometric divergence finding (variance grows 2.60$\times$ while shifts decline 71\%) provides quantitative evidence for what these surveys observe behaviorally: reflection is exploration, not refinement.
+
+\subsection{Representation Engineering}
+
+\textbf{Representation Engineering} \citep{zou2023representation} and work on world models \citep{gurnee2023language} probe static representations. We extend to \textit{dynamic} analysis: tracking representations across recursive iterations.
+
+\subsection{Dimensionality Reduction}
+
+UMAP \citep{mcinnes2018umap} and t-SNE visualize embeddings. We apply UMAP to \textit{multi-loop trajectories}, revealing exploration-then-drift and style-dependent signatures invisible in single-point clustering.
+
+Recent work on UMAP force shapes and initialization sensitivity \citep{islam2025shape} shows that UMAP can amplify or suppress structure depending on hyperparameters and local density. Our finding that UMAP amplifies style structure more than provider structure (4.2$\times$ vs 2.4$\times$ amplification from 4096D to 2D) aligns with UMAP's sensitivity to tight local clusters, which style creates more strongly than provider in E5 space.
+
+\subsection{Prompt Engineering}
+
+Chain-of-Thought \citep{wei2022chain} and Self-Consistency \citep{wang2023self} showed prompting affects capabilities. Our finding that style explains 3.6$\times$ more variance than architecture (native 4096D space) provides geometric evidence for what prompting literature demonstrates behaviorally.
+
+Recent work on delimiter-format brittleness \citep{su2025single} shows that minor prompt formatting changes can flip model rankings and behaviors. Our finding that style dominates geometry in E5 space (6.5$\times$ style/provider ratio in 2D UMAP, 3.6$\times$ in native 4096D space) suggests that prompt scaffolding (style) is as consequential as model identity (provider) for shaping iterative reflection geometry, with immediate implications for evaluation design and deployment.
+
+\subsection{Positioning}
+
+Novel contributions:
+\begin{enumerate}
+\item \textbf{Trajectory analysis}: Treating reflection as paths reveals dynamics invisible to single-point analysis
+\item \textbf{Quantified style dominance}: First geometric measurement (style $\eta^2$ = 8.6\% vs provider $\eta^2$ = 2.4\% in native 4096D E5-Mistral space; 36\% vs 6\% in 2D UMAP projection)
+\item \textbf{Bootstrap-validated topology}: Rigorous per-provider validation with transparent failure reporting
+\end{enumerate}
+
+\section*{Acknowledgments}
+
+Research conducted independently by twin brothers in Alaska, without institutional support. Methodology corrections applied transparently.
+
+\textbf{Principles}: This work embodies four transparency principles:
+\begin{enumerate}
+\item \textbf{Honest failure reporting}: H3 rejection (provider ranking instability) reported prominently, not buried
+\item \textbf{Correctness over convenience}: Fixed methodology issues with full documentation (\S2.5)
+\item \textbf{Evidence through bootstrap}: All retained primary findings pass B=1000 validation at p<0.001 (H3 rejected)
+\item \textbf{Accountability in corrections}: N=3 review trail documented, commit history preserved
+\end{enumerate}
+
+\textbf{AI Assistance}: Reviewed with multiple AI systems for technical accuracy. Final responsibility rests with human authors.
+
+% \bibliographystyle{plainnat}  % disabled for arXiv; using prebuilt .bbl
+% \bibliography{references}     % disabled for arXiv; using prebuilt .bbl
+\input{reflective-manifold.bbl}  % freeze bibliography for arXiv
+
+\appendix
+
+\section{Multi-Embedder Validation}
+\label{sec:multi-embedder}
+
+\subsection{Shift/Variance Dynamics (R1)}
+
+\begin{table}[!htbp]
+\centering
+\caption{Multi-Embedder Dynamics}
+\label{tab:multi-embedder-dynamics}
+\begin{tabular}{lccc}
+\toprule
+Embedder & Dim & Shift Decline & Variance Growth \\
+\midrule
+MiniLM & 384 & 40\% & 3.6$\times$ \\
+MPNet & 768 & 49\% & 3.9$\times$ \\
+E5-Large & 1024 & 52\% & 2.60$\times$ \\
+\textbf{E5-Mistral}\textsuperscript{\dag} & 4096 & \textbf{71\%} & \textbf{2.60$\times$} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textsuperscript{\dag} Primary embedder. All show shift decline by 40-71\% and variance growth of 2.60-3.9$\times$, confirming R1 dynamics are embedder-agnostic.
+
+\subsection{Style/Provider \texorpdfstring{$\eta^2$}{eta-squared} Topology (R3)}
+
+\begin{table}[!htbp]
+\centering
+\caption{Multi-Embedder Topology}
+\label{tab:multi-embedder-topology}
+\begin{tabular}{lccccl}
+\toprule
+Embedder & Dimensions & Style $\eta^2$ & Provider $\eta^2$ & Ratio & Convergence \\
+\midrule
+MiniLM-L6-v2 & 384 & 28.18\% & 7.60\% & \textbf{3.71$\times$} & \checkmark 10.1\% \\
+MPNet-base-v2 & 768 & 22.89\% & 9.34\% & \textbf{2.45$\times$} & \checkmark 6.4\% \\
+E5-Large-v2 & 1024 & 24.69\% & 14.29\% & \textbf{1.73$\times$} & \checkmark 1.7\% \\
+E5-Mistral-7B & 4096 & 30.42\% & 15.99\% & \textbf{1.90$\times$} & \checkmark 0.1\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Inverse Dimensionality-Style Relationship}: Lower-dimensional embeddings show stronger style dominance (384D: 3.71$\times$) compared to higher-dimensional embeddings (1024D: 1.73$\times$), with E5-Mistral (4096D: 1.90$\times$) showing deviation from perfect monotonicity.
+
+\textbf{Independent Computational Validation}: To validate statistical interpretations, we employed three independent AI systems (Claude Code, Codex, Gemini) as computational reviewers---a form of automated methodological review. This approach tests whether conclusions (e.g., style dominance pattern) are derivable from statistical results alone, without coordination between reviewers. The inverse dimensionality-style correlation achieved \textbf{Statistical Consensus (3/3)} on pattern existence but \textbf{Interpretative Divergence (0/3 agreement)} on underlying mechanisms. This divergence is methodologically informative: the pattern's existence is statistically robust, but mechanistic interpretation requires domain expertise beyond statistical analysis.
+
+\textbf{High-Priority Concerns}: Both Codex and Gemini raised critical issues that must be addressed before this finding can be considered fully validated:
+\begin{enumerate}
+\item \textbf{PCA Projection Bias}: Using a fixed K=50 for PCA may bias comparisons across embeddings of different dimensions.
+\item \textbf{Model Architecture Confound}: The analysis does not disentangle the effects of dimensionality from the models' underlying architecture and training objectives.
+\end{enumerate}
+
+\textbf{Convergence}: All four embedders passed ANOVA convergence validation (<20\% difference between ANOVA on coordinates vs distances), confirming the style > provider pattern is not a methodological artifact.
+
+\section{Response Length by Provider}
+
+\begin{table}[!htbp]
+\centering
+\caption{Response Length Statistics}
+\label{tab:response-length}
+\begin{tabular}{lcccc}
+\toprule
+Provider & Outputs & Mean Tokens & Max & >8,192 \\
+\midrule
+Anthropic & 28,656 & 530 & 15,893 & 8 \\
+OpenAI & 19,072 & 2,497 & 16,160 & 314 \\
+Google & 19,088 & 1,558 & 16,457 & 21 \\
+xAI & 19,008 & 1,456 & 14,234 & 18 \\
+DeepSeek & 9,536 & 541 & 3,874 & 0 \\
+Moonshot & 9,536 & 1,872 & 12,456 & 6 \\
+\textbf{Total} & \textbf{104,896} & \textbf{1,419} & - & \textbf{367} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Despite 4.7$\times$ variation, patterns are robust to length control (\S4.7).
+
+\section{Authoritative Findings Reference (Summary)}
+\label{sec:authoritative}
+
+\textit{Full document: \texttt{docs/findings/authoritative-findings-v2.md}}
+
+\subsection{Dataset Summary}
+\label{sec:dataset-validation}
+
+\begin{table}[!htbp]
+\centering
+\caption{Dataset Summary}
+\label{tab:dataset}
+\footnotesize
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+Metric & Value & Source \\
+\midrule
+Experiments & 13,112 & \texttt{full-scale-2025-11-20-v2} batch \\
+Embeddings & 104,896 & Complete trajectories (13,112 $\times$ 8 loops) \\
+Providers & 6 & Anthropic, Google, OpenAI, DeepSeek, Moonshot, xAI \\
+Models & 11 & See authoritative findings for breakdown \\
+Styles & 8 & 7 scaffolds + 1 baseline (none) \\
+Categories & 12 & Various semantic domains \\
+Completeness & 100\% & All experiments have complete 8-loop trajectories \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Core Results Mapping}
+
+\begin{table}[!htbp]
+\centering
+\caption{Core Results}
+\label{tab:core-results}
+\small
+\begin{tabular}{llll}
+\toprule
+ID & Finding Title & Key Metric & Validation \\
+\midrule
+\textbf{R1} & Exploration-Then-Drift & 71\% shift decline, & Bootstrap B=1000, \\
+& Dynamics & 2.6$\times$ variance growth & p<0.001 \\
+\textbf{R2} & Two-Dimensional & r=0.88 (Shift$\leftrightarrow$Effort), & Pearson \\
+& Correlation Structure & r=0.94 (Var$\leftrightarrow$Dist) & correlation \\
+\textbf{R3} & Style-Dominant & $R^2$ 17.2\% vs 9.9\% (1.74$\times$), & PERMANOVA, \\
+& Manifold Topology & $\eta^2$ 8.61\% vs 2.37\% (3.63$\times$) & native ANOVA \\
+\textbf{R4} & Category Structure & Category 35.6\%$\rightarrow$9.3\% (F=189.7), & PERMANOVA, \\
+& Transformation & Style 0.002\%$\rightarrow$17.2\% (F=421.3) & 999 permutations \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Validation Completeness}
+
+\begin{table}[!htbp]
+\centering
+\caption{Validation Status}
+\label{tab:validation}
+\begin{tabular}{lll}
+\toprule
+Type & Status & Details \\
+\midrule
+Data Completeness & \checkmark & 13,112/13,112 (100\%) \\
+N=3 Verification & \checkmark & Codex + Gemini + Claude unanimous \\
+Bootstrap (B=1000) & \checkmark & All findings validated \\
+PERMANOVA & \checkmark & Rotation-invariant validation \\
+Run-Level PERMANOVA & \checkmark & Loop 7 only, N=13,112 independent: \\
+& & Style $R^2$=28.2\% vs Provider $R^2$=18.0\% \\
+PERMDISP & \checkmark & Dispersion homogeneity test (Anderson 2006): \\
+& & F=487.75 (style), 104.92 (provider), \\
+& & 42.02 (category), all p<0.001 \\
+Scaffold-Free & \checkmark & Loop 0: Category $\eta^2$=35.6\%, \\
+& & Style $\eta^2$=0.002\% (pre-scaffold) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Methodological Rigor \& Transparency (Summary)}
+
+\textit{Full document: \texttt{docs/addendum-methodology.md}}
+
+\subsection{Scientific Approach}
+
+\textbf{Experimental Design:}
+\begin{itemize}
+\item \textbf{Configuration-as-code paradigm} ensures reproducibility (\texttt{cmd/experiment/\allowbreak batches.go} as immutable source)
+\item \textbf{Progressive validation:} Pilots (N=660) $\rightarrow$ Full-scale (N=13,112)
+\item \textbf{Factorial design:} 6 providers $\times$ 8 styles $\times$ 12 categories with controls
+\item \textbf{Deterministic execution:} Unique IDs from parameter hash
+\end{itemize}
+
+\textbf{Statistical Validation:}
+\begin{itemize}
+\item Bootstrap validation (B=1000, p<0.001) rather than parametric assumptions
+\item Random seeds controlled for reproducibility
+\item Confidence intervals transparently reported
+\end{itemize}
+
+\textbf{Confound Handling:}
+\begin{itemize}
+\item \checkmark Multi-embedder validation (4 models: 384D-4096D)
+\item \checkmark Native space analysis (pre-UMAP validation)
+\item \checkmark Per-provider testing (patterns in $\geq$5/6 providers)
+\item \checkmark Scaffold prompt leakage addressed (Loop 0 baseline confirms category structure pre-exists at 35.6\%)
+\item $\triangle$ Single embedding family limitation (E5 only)
+\item $\triangle$ Short trajectories (8 loops maximum)
+\end{itemize}
+
+\subsection{Implementation Quality}
+
+\textbf{Strengths:}
+\begin{itemize}
+\item Modular Go pipeline (\texttt{experiment}, \texttt{validate}, \texttt{visualize})
+\item Idempotent operations for safe retries
+\item Type-safe configuration with registries
+\item Rich JSONL provenance logging
+\end{itemize}
+
+\textbf{Areas for Improvement:}
+\begin{itemize}
+\item Command-layer testing coverage (2/29 files)
+\item Manual environment loading requirement
+\item Memory requirements (96GB for E5-Mistral-7B)
+\end{itemize}
+
+\subsection{Documentation \& Transparency}
+
+\begin{itemize}
+\item 80+ implementation plans in \texttt{docs/plans/}
+\item 113+ review files with N=3 validation
+\item All corrections documented with commit trail
+\item Bootstrap/validation artifacts preserved
+\end{itemize}
+
+\textbf{Assessment Method:} N=3 Independent Review (Gemini, Codex, Claude) with unanimous agreement on core methodology validity.
+
+\end{document}

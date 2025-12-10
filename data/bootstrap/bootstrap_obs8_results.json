@@ -1,0 +1,73 @@
+{
+  "observation": "Obs 8: Curvature Metric Correlations",
+  "n_bootstrap": 1000,
+  "confidence_level": 0.95,
+  "original_findings": {
+    "shift_effort_r": 0.862,
+    "variance_distance_r": 0.86,
+    "variance_shift_r": 0.14
+  },
+  "original_computed": {
+    "shift_effort_r": 0.8793483756737688,
+    "shift_effort_p": 0.0,
+    "variance_distance_r": 0.9408077755373507,
+    "variance_distance_p": 0.0,
+    "variance_shift_r": 0.6826704610452234,
+    "variance_shift_p": 0.0
+  },
+  "bootstrap_distributions": {
+    "shift_effort": {
+      "mean": 0.8792826448969363,
+      "std": 0.0020974225800217865,
+      "ci_lower": 0.8752094086689197,
+      "ci_upper": 0.8833521282969502,
+      "min": 0.8725175374499754,
+      "max": 0.8864949328828484
+    },
+    "variance_distance": {
+      "mean": 0.9408123603993389,
+      "std": 0.0007300677767609645,
+      "ci_lower": 0.9393162473844078,
+      "ci_upper": 0.9421739394105328,
+      "min": 0.9383077075389203,
+      "max": 0.9434767628977099
+    },
+    "variance_shift": {
+      "mean": 0.6823972292747512,
+      "std": 0.004819899042644242,
+      "ci_lower": 0.6730805972310457,
+      "ci_upper": 0.6912285090084056,
+      "min": 0.6676376212270777,
+      "max": 0.6980420794563981
+    }
+  },
+  "hypothesis_tests": {
+    "h1_shift_effort_r_gte_0.8": {
+      "threshold": 0.8,
+      "samples_pass": 1000,
+      "pass_rate": 1.0,
+      "result": "PASS"
+    },
+    "h2_variance_distance_r_gte_0.8": {
+      "threshold": 0.8,
+      "samples_pass": 1000,
+      "pass_rate": 1.0,
+      "result": "PASS"
+    },
+    "h3_variance_shift_independence_abs_r_lte_0.2": {
+      "threshold": 0.2,
+      "samples_pass": 0,
+      "pass_rate": 0.0,
+      "result": "FAIL"
+    }
+  },
+  "effect_size_stability": {
+    "shift_effort_within_20pct": 1.0,
+    "variance_distance_within_20pct": 1.0
+  },
+  "n3_validation": {
+    "all_hypotheses_pass": false,
+    "effect_sizes_stable": true,
+    "promoted_to_n3": false
+  }
+}

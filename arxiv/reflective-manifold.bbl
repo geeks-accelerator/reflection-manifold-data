@@ -1,0 +1,109 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Anderson(2001)]{anderson2001permanova}
+M.~J. Anderson.
+\newblock A new method for non-parametric multivariate analysis of variance.
+\newblock \emph{Austral Ecology}, 26\penalty0 (1):\penalty0 32--46, 2001.
+\newblock \doi{10.1111/j.1442-9993.2001.01070.pp.x}.
+
+\bibitem[Anderson(2006)]{anderson2006dispersion}
+M.~J. Anderson.
+\newblock Distance-based tests for homogeneity of multivariate dispersions.
+\newblock \emph{Biometrics}, 62\penalty0 (1):\penalty0 245--253, 2006.
+\newblock \doi{10.1111/j.1541-0420.2005.00440.x}.
+
+\bibitem[Cohen(1988)]{cohen1988statistical}
+J.~Cohen.
+\newblock \emph{Statistical Power Analysis for the Behavioral Sciences}.
+\newblock Routledge, 2nd edition, 1988.
+
+\bibitem[Gurnee and Tegmark(2023)]{gurnee2023language}
+W.~Gurnee and M.~Tegmark.
+\newblock Language models represent space and time.
+\newblock \emph{arXiv preprint arXiv:2310.02207}, 2023.
+
+\bibitem[Islam and Fleischer(2025)]{islam2025shape}
+M.~T. Islam and P.~Fleischer.
+\newblock The shape of attraction in umap: Exploring the embedding forces in
+  dimensionality reduction.
+\newblock \emph{arXiv preprint arXiv:2503.09101}, 2025.
+
+\bibitem[Li et~al.(2025)]{li2025multiturn}
+Y.~Li et~al.
+\newblock Beyond single-turn: A survey on multi-turn interactions with large
+  language models.
+\newblock \emph{arXiv preprint arXiv:2504.04717}, 2025.
+
+\bibitem[Madaan et~al.(2023)]{madaan2023selfrefine}
+A.~Madaan et~al.
+\newblock Self-refine: Iterative refinement with self-feedback.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~36, 2023.
+
+\bibitem[McInnes et~al.(2018)McInnes, Healy, and Melville]{mcinnes2018umap}
+L.~McInnes, J.~Healy, and J.~Melville.
+\newblock Umap: Uniform manifold approximation and projection for dimension
+  reduction.
+\newblock \emph{arXiv preprint arXiv:1802.03426}, 2018.
+
+\bibitem[Plaat et~al.(2024)Plaat, Kosters, and Preuss]{plaat2024reasoning}
+A.~Plaat, W.~Kosters, and M.~Preuss.
+\newblock Reasoning with large language models, a survey.
+\newblock \emph{arXiv preprint arXiv:2407.11511}, 2024.
+
+\bibitem[Shinn et~al.(2023)Shinn, Cassano, Gopinath, Narasimhan, and
+  Yao]{shinn2023reflexion}
+N.~Shinn, F.~Cassano, A.~Gopinath, K.~Narasimhan, and S.~Yao.
+\newblock Reflexion: Language agents with verbal reinforcement learning.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~36, 2023.
+
+\bibitem[Su et~al.(2025)Su, Zhang, Ullrich, Bottou, and Ibrahim]{su2025single}
+J.~Su, T.~Zhang, K.~Ullrich, L.~Bottou, and M.~Ibrahim.
+\newblock A single character can make or break your llm evals.
+\newblock \emph{arXiv preprint arXiv:2510.05152}, 2025.
+
+\bibitem[Wang et~al.(2023)Wang, Wei, Schuurmans, Le, Chi, Narang, Chowdhery,
+  and Zhou]{wang2023self}
+X.~Wang, J.~Wei, D.~Schuurmans, Q.~Le, E.~Chi, S.~Narang, A.~Chowdhery, and
+  D.~Zhou.
+\newblock Self-consistency improves chain of thought reasoning in language
+  models.
+\newblock In \emph{International Conference on Learning Representations}, 2023.
+
+\bibitem[Wei et~al.(2022)Wei, Wang, Schuurmans, Bosma, Ichter, Xia, Chi, Le,
+  and Zhou]{wei2022chain}
+J.~Wei, X.~Wang, D.~Schuurmans, M.~Bosma, B.~Ichter, F.~Xia, E.~Chi, Q.~Le, and
+  D.~Zhou.
+\newblock Chain-of-thought prompting elicits reasoning in large language
+  models.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~35, pages 24824--24837, 2022.
+
+\bibitem[Yao et~al.(2023{\natexlab{a}})Yao, Yu, Zhao, Shafran, Griffiths, Cao,
+  and Narasimhan]{yao2023tot}
+S.~Yao, D.~Yu, J.~Zhao, I.~Shafran, T.~L. Griffiths, Y.~Cao, and K.~Narasimhan.
+\newblock Tree of thoughts: Deliberate problem solving with large language
+  models.
+\newblock \emph{arXiv preprint arXiv:2305.10601}, 2023{\natexlab{a}}.
+
+\bibitem[Yao et~al.(2023{\natexlab{b}})Yao, Zhao, Yu, Du, Shafran, Narasimhan,
+  and Cao]{yao2023react}
+S.~Yao, J.~Zhao, D.~Yu, N.~Du, I.~Shafran, K.~Narasimhan, and Y.~Cao.
+\newblock React: Synergizing reasoning and acting in language models.
+\newblock In \emph{International Conference on Learning Representations},
+  2023{\natexlab{b}}.
+
+\bibitem[Zou et~al.(2023)Zou, Phan, Chen, Campbell, Guo, Ren, Pan, Yin,
+  Mazeika, Dombrowski, et~al.]{zou2023representation}
+A.~Zou, L.~Phan, S.~Chen, J.~Campbell, P.~Guo, R.~Ren, A.~Pan, X.~Yin,
+  M.~Mazeika, A.-K. Dombrowski, et~al.
+\newblock Representation engineering: A top-down approach to ai transparency.
+\newblock \emph{arXiv preprint arXiv:2310.01405}, 2023.
+
+\end{thebibliography}

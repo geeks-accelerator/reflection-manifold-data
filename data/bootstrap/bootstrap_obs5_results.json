@@ -1,0 +1,95 @@
+{
+  "observation": "Obs 5: Reflection Stabilization Dynamics",
+  "n_bootstrap": 1000,
+  "confidence_level": 0.95,
+  "original_findings": {
+    "shift_decline_ratio": 0.29133536077437566,
+    "variance_growth_ratio": 2.6000974108455157,
+    "provider_ranking": [
+      "xai",
+      "openai",
+      "google",
+      "moonshotai",
+      "anthropic",
+      "deepseek"
+    ],
+    "expected_ranking": [
+      "deepseek",
+      "xai",
+      "google",
+      "anthropic",
+      "openai",
+      "moonshotai"
+    ]
+  },
+  "original_computed": {
+    "loop1_shift": 0.23438026868941086,
+    "loop7_shift": 0.06828326013702461,
+    "loop1_variance": 0.004405929413683818,
+    "loop7_variance": 0.011455845660887398,
+    "rank_correlation": -0.14285714285714288
+  },
+  "bootstrap_distributions": {
+    "shift_decline_ratio": {
+      "mean": 0.29144255649945594,
+      "std": 0.002266191647577493,
+      "ci_lower": 0.28726646048826254,
+      "ci_upper": 0.29614180950244606,
+      "min": 0.28433458398164185,
+      "max": 0.2990693169488186
+    },
+    "variance_growth_ratio": {
+      "mean": 2.6002412240819512,
+      "std": 0.016858409538053152,
+      "ci_lower": 2.568630984875493,
+      "ci_upper": 2.6320934291272367,
+      "min": 2.5566119765259736,
+      "max": 2.658005291881032
+    },
+    "rank_correlation": {
+      "mean": -0.14285714285714285,
+      "std": 2.7755575615628914e-17,
+      "ci_lower": -0.14285714285714288,
+      "ci_upper": -0.14285714285714288,
+      "min": -0.14285714285714288,
+      "max": -0.14285714285714288
+    }
+  },
+  "hypothesis_tests": {
+    "h1_shift_decline_per_provider": {
+      "description": "Majority of providers (\u22655/6) show shift decline (ratio < 1.0)",
+      "threshold_providers": 5,
+      "total_providers": 6,
+      "samples_pass": 1000,
+      "pass_rate": 1.0,
+      "result": "PASS",
+      "note": "FIX #5: Changed from aggregated mean to per-provider majority test"
+    },
+    "h2_variance_growth_per_provider": {
+      "description": "Majority of providers (\u22655/6) show variance growth (ratio > 1.0)",
+      "threshold_providers": 5,
+      "total_providers": 6,
+      "samples_pass": 1000,
+      "pass_rate": 1.0,
+      "result": "PASS",
+      "note": "FIX #5: Changed from aggregated mean to per-provider majority test"
+    },
+    "h3_provider_ranking_correlation_gte_0.8": {
+      "threshold": 0.8,
+      "direction": "greater_than_or_equal",
+      "samples_pass": 0,
+      "pass_rate": 0.0,
+      "result": "FAIL",
+      "note": "FIX #4: NaN values now count as failures (not excluded from denominator)"
+    }
+  },
+  "effect_size_stability": {
+    "shift_decline_within_20pct": 1.0,
+    "variance_growth_within_20pct": 1.0
+  },
+  "n3_validation": {
+    "all_hypotheses_pass": false,
+    "effect_sizes_stable": true,
+    "promoted_to_n3": false
+  }
+}
